@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import * as yup from 'yup';
-// import styled from "styled-components";
+import styled from "styled-components";
 
 
 const schema = yup.object().shape({
@@ -81,5 +81,3 @@ export default function Login(props) {
     </div>
   );
 }
-
-// url/
