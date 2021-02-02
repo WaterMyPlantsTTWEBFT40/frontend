@@ -42,11 +42,7 @@ export default function Login(props) {
           Password
           <input
             name="password"
-<<<<<<< HEAD
             type="pass"
-=======
-            type="text"
->>>>>>> ab0d82c37883194fe0ce90e48b9f3d983fd96123
             onChange={onChange}
             value={value.password}
             placeholder="Password"
@@ -58,11 +54,7 @@ export default function Login(props) {
             name="phoneNumber"
             type="tel"
             onChange={onChange}
-<<<<<<< HEAD
             value={value.phoneNumber}
-=======
-            value={value.phonenumber}
->>>>>>> ab0d82c37883194fe0ce90e48b9f3d983fd96123
             placeholder="Phone Number"
           />
         </label>
