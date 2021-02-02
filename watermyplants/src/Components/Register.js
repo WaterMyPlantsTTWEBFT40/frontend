@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as yup from 'yup';
 // import styled from "styled-components";
@@ -10,11 +10,16 @@ const schema = yup.object().shape({
   phoneNumber: yup.string().required('A phone is required').min(10, 'Your phone number needs to be at least 10 chars long'),
 })
 
+
 export default function Register(props)  {
-  
+
   const { value, submit, change, pageChange } = props;
   const [disabled, setDisabled] = useState(true)
+  useEffect(() => {
+    schema.isValid(value).then(valid => setDisabled(!valid))
+  }, [value])
   
+
   const onChange = (evt) => {
     const { name, value } = evt.target;
     change(name, value);
