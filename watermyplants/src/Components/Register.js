@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import * as yup from 'yup';
 // import styled from "styled-components";
 
-const [disabled, setDisabled] = useState(true)
 
 const schema = yup.object().shape({
   username: yup.string().required('A username is required').min(4, 'The Username needs to be 4 chars long'),
@@ -12,9 +11,10 @@ const schema = yup.object().shape({
 })
 
 export default function Register(props)  {
-
-  const { value, submit, change, disabled, pageChange } = props;
-
+  
+  const { value, submit, change, pageChange } = props;
+  const [disabled, setDisabled] = useState(true)
+  
   const onChange = (evt) => {
     const { name, value } = evt.target;
     change(name, value);
