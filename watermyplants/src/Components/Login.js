@@ -33,7 +33,7 @@ export default function Login(props) {
           Password
           <input
             name="password"
-            type="input"
+            type="pass"
             onChange={onChange}
             value={value.password}
             placeholder="Password"
@@ -43,9 +43,9 @@ export default function Login(props) {
           Phone Number
           <input
             name="phoneNumber"
-            type="text"
+            type="tel"
             onChange={onChange}
-            value={value.password}
+            value={value.phoneNumber}
             placeholder="Phone Number"
           />
         </label>
@@ -61,7 +61,7 @@ export default function Login(props) {
           Don't Have An Account?
           <Link to="/register" onClick={pageChange}>
             <br></br>
-            Login
+            Register
           </Link>
           </div>
       </form>
