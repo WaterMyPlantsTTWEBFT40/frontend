@@ -66,13 +66,46 @@ const Login = () => {
     username: "",
     password: "",
   };
+
+  const initialFormErrors = {
+    username:"",
+    password:"",
+    phoneNumber:"",
+  }
+
   const [disabled, setDisabled] = useState(true);
   const [value, setValue] = useState(initialFormValues);
+  const [ formErrors, setFormErrors ] = useState(initialFormErrors)
   const { push } = useHistory();
 
   useEffect(() => {
     schema.isValid(value).then((valid) => setDisabled(!valid));
   }, [value]);
+
+
+  // const onChange = ( e /* name, value */) => {
+
+  //   yup
+  //      .reach(schema, /* name*/)
+  //      .validate(value)
+  //     .then(() => {
+  //       setFormErrors({
+  //         ...formErrors,
+  //       // [ /*name */]: "",
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       setFormErrors({
+  //         ...formErrors,
+  //         // [/*name */]: error.errors,
+  //       });
+  //     });
+  //   setValue({
+  //     ...value,
+  //     // [/*name */]: value,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   const onChange = (e) => {
     setValue({
@@ -138,9 +171,9 @@ const Login = () => {
           </button>
         </StyledInputs>
         <div className="errors">
-          {/* <div>{errors.username}</div>
-                <div>{errors.password}</div>
-                <div>{errors.phoneNumber}</div> */}
+          <div>{formErrors.username}</div>
+                <div>{formErrors.password}</div>
+                <div>{formErrors.phoneNumber}</div>
         </div>
         <StyledRegisterLink>
           Don't Have An Account?
