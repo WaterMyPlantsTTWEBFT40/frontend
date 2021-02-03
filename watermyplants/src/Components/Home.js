@@ -1,5 +1,11 @@
-// Home Page
-// Show the plant cards here
-// Edit them too?
+import React from "react";
 
-//  url/Home
+const Home = () => {
+  return (
+    <div>
+      <h2>Hello, from Home!</h2>
+      <p>I should be hidden if not logged in!</p>
+    </div>
+  );
+};
+export default Home;
