@@ -14,8 +14,6 @@ export default function Login(props) {
   const { value, submit, change, pageChange } = props;
   const [disabled, setDisabled] = useState(true)
 
-  const [disabled, setDisabled] = useState(true)
-
   useEffect(() => {
     schema.isValid(value).then(valid => setDisabled(!valid))
   }, [value])
