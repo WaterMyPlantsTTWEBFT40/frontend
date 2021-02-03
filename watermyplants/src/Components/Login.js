@@ -29,9 +29,10 @@ export default function Login(props) {
   };
 
   return (
-    <div className="login-container">
+    <StyledLoginContainer>
       <h1> Welcome to Water My Plants Login! </h1>
-      <form className="login-form" onSubmit={onSubmit}>
+      <StyledForm className="login-form" onSubmit={onSubmit}>
+        <StyledInputs>
         <label>
           Username
           <input
@@ -65,19 +66,59 @@ export default function Login(props) {
         <button disabled={disabled} className="submit-btn">
           Login
         </button>
+        </StyledInputs>
         <div className="errors">
           {/* <div>{errors.username}</div>
             <div>{errors.password}</div>
             <div>{errors.phoneNumber}</div> */}
         </div>
-        <div>
+        <StyledRegisterLink>
           Don't Have An Account?
           <Link to="/register" onClick={pageChange}>
             <br></br>
             Register
           </Link>
-          </div>
-      </form>
-    </div>
+          </StyledRegisterLink>
+      </StyledForm>
+    </StyledLoginContainer>
   );
 }
+
+const StyledLoginContainer = styled.div`
+  color: black;
+  height: auto;
+  width: auto;
+  //background-color: ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 1px 1px;
+  flex-wrap: wrap;
+  flex-direction: column;
+`;
+
+const StyledForm = styled.form`
+  height: auto; 
+`;
+
+const StyledInputs = styled.div`
+  color: black;
+  height: auto;
+  width: auto;
+  //background-color:
+  display: flex;
+  border: 3px solid slategray;
+  box-shadow: 0.8rem 0.8rem gray;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: match-parent;
+  padding: 5% 5% 5% 5%;
+  margin: 0% 0% 0% 0%;
+  flex-wrap: wrap;
+  flex-direction: column;
+`;
+
+const StyledRegisterLink = styled.div`
+  margin: 10% auto auto auto;
+`
