@@ -26,7 +26,7 @@ const StyledForm = styled.form`
 const StyledInputs = styled.div`
   color: black;
   height: auto;
-  width: auto;
+  width: 110%;
   //background-color:
   display: flex;
   border: 3px solid slategray;
@@ -114,6 +114,7 @@ const Register = () => {
         <StyledLabel>
           <label>
             Username
+            <br></br>
             <input
               name="username"
               type="text"
@@ -126,6 +127,7 @@ const Register = () => {
         <StyledLabel>
           <label>
             Email
+            <br></br>
             <input
               name="email"
               type="email"
@@ -138,6 +140,7 @@ const Register = () => {
         <StyledLabel>
           <label>
             Password
+            <br></br>
             <input
               name="password"
               type="password"
