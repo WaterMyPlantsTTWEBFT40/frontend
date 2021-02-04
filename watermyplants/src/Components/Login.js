@@ -23,6 +23,11 @@ const StyledForm = styled.form`
   height: auto;
 `;
 
+const StyledLabel = styled.div`
+
+`;
+
+
 const StyledInputs = styled.div`
   color: black;
   height: auto;
@@ -135,6 +140,7 @@ const Login = () => {
       <h1> Welcome to Water My Plants Login! </h1>
       <StyledForm className="login-form" onSubmit={login}>
         <StyledInputs>
+          <StyledLabel>
           <label>
             Username
             <input
@@ -145,6 +151,8 @@ const Login = () => {
               placeholder="Username"
             />
           </label>
+          </StyledLabel>
+          <StyledLabel>
           <label>
             Password
             <input
@@ -155,6 +163,7 @@ const Login = () => {
               placeholder="Password"
             />
           </label>
+          </StyledLabel>
           <button disabled={disabled} className="submit-btn">
             Login
           </button>

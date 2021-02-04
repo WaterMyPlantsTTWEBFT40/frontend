@@ -33,11 +33,17 @@ const StyledInputs = styled.div`
   box-shadow: 0.8rem 0.8rem gray;
   align-items: center;
   justify-content: space-evenly;
-  text-align: match-parent;
+  text-align: center;
   padding: 5% 5% 5% 5%;
   margin: 0% 0% 0% 0%;
   flex-wrap: wrap;
   flex-direction: column;
+`;
+
+const StyledLabel = styled.div`
+margin:auto;
+height: auto;
+
 `;
 
 const StyledLoginLink = styled.div`
@@ -105,6 +111,7 @@ const Register = () => {
 
       <StyledForm onSubmit={onSubmit}>
         <StyledInputs>
+        <StyledLabel>
           <label>
             Username
             <input
@@ -115,6 +122,8 @@ const Register = () => {
               placeholder="Username"
             />
           </label>
+        </StyledLabel>
+        <StyledLabel>
           <label>
             Email
             <input
@@ -125,6 +134,8 @@ const Register = () => {
               placeholder="Email"
             />
           </label>
+        </StyledLabel>
+        <StyledLabel>
           <label>
             Password
             <input
@@ -135,6 +146,7 @@ const Register = () => {
               placeholder="Password"
             />
           </label>
+        </StyledLabel>
           <button disabled={disabled} className="submit-btn">
             Register
           </button>
