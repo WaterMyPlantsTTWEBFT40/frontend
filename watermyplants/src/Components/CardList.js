@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import Card from "./cards.js"
+import Card from "./Card"
 import axios from "axios"
+
 export default function Cardlist(props) {
 
     const [plants, setPlants] = useState([])
@@ -15,13 +16,13 @@ export default function Cardlist(props) {
             console.log(err)
         })
     }, [] )
-    
+
     //Unfinished Use effect Hook.
 
     return(
         <div>
             {plants.map((elem) => {
-                return <Card key = {elem.id}  name={elem.name} species={elem.species} image={elem.image} h2o={elem.h2o}/>
+                return <Card key = {elem.id} card = {elem}/>
             })}
         </div>
     )

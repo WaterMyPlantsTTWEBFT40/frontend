@@ -169,9 +169,9 @@ const Login = () => {
           </button>
         </StyledInputs>
         <div className="errors">
-          <div>{formErrors.username}</div>
-                <div>{formErrors.password}</div>
-                <div>{formErrors.phoneNumber}</div>
+                {/* <div>{errors.username}</div>
+                <div>{errors.password}</div>
+                <div>{errors.phoneNumber}</div> */}
         </div>
         <StyledRegisterLink>
           Don't Have An Account?
