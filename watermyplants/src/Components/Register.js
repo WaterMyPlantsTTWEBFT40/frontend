@@ -35,7 +35,7 @@ const StyledInputs = styled.div`
   justify-content: space-evenly;
   text-align: center;
   padding: 5% 5% 5% 5%;
-  margin: 0% 0% 0% 0%;
+  margin: 5% 0% 5% 0%;
   flex-wrap: wrap;
   flex-direction: column;
 `;
