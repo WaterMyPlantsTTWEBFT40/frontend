@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axiosWithAuth from '../Util/axiosWithAuth';
 import '../custom.css';
-import axios from 'axios';
 
 
 
