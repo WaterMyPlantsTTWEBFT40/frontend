@@ -1,150 +1,154 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import * as yup from 'yup';
-import styled from "styled-components";
-import axios from 'axios';
+import { useHistory } from "react-router-dom";
+import * as yup from "yup";
+import axios from "axios";
+import "./style.css";
+import { REGISTER_URL } from "../Util/Private";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 
-// Styled-Components
-const StyledRegisterContainer = styled.div`
-  color: black;
-  height: auto;
-  width: auto;
-  //background-color: ;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin: 1px 1px;
-  flex-wrap: wrap;
-  flex-direction: column;
-`;
-
-const StyledForm = styled.form`
-  height: auto; 
-`;
-
-const StyledInputs = styled.div`
-  color: black;
-  height: auto;
-  width: auto;
-  //background-color:
-  display: flex;
-  border: 3px solid slategray;
-  box-shadow: 0.8rem 0.8rem gray;
-  align-items: center;
-  justify-content: space-evenly;
-  text-align: match-parent;
-  padding: 5% 5% 5% 5%;
-  margin: 0% 0% 0% 0%;
-  flex-wrap: wrap;
-  flex-direction: column;
-`;
-
-const StyledLoginLink = styled.div`
-  margin: 10% auto auto auto;
-`
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
 const schema = yup.object().shape({
-    username: yup.string().required('A username is required').min(4, 'The Username needs to be 4 chars long'),
-    password: yup.string().required('A password is required').min(5, 'The password needs to be at least 5 chars long'),
-    phoneNumber: yup.string().required('A phone is required').min(10, 'Your phone number needs to be at least 10 chars long'),
-  });
+  username: yup
+    .string()
+    .required("A username is required")
+    .min(4, "The Username needs to be 4 chars long"),
+  email: yup.string().required("A email is required"),
+  password: yup
+    .string()
+    .required("A password is required")
+    .min(6, "Your password needs to be at least 10 chars long"),
+});
 
-// Refactor this code and put in App.js what needs to be there
+const initialFormValues = {
+  username: "",
+  email: "",
+  password: "",
+};
+
 const Register = () => {
-    const initialFormValues = {
-        username: '',
-        phoneNumber:'',
-        password: '',
-    }
-    const [value, setValue] = useState(initialFormValues);
-    const [disabled, setDisabled] = useState(true);
-    const {push} = useHistory();
+  const [value, setValue] = useState(initialFormValues);
+  const { push } = useHistory();
+  const classes = useStyles();
 
-  useEffect(() => {
-    schema.isValid(value).then(valid => setDisabled(!valid))
-  }, [value])
+  const onChange = (e) => {
+    setValue({
+      ...value,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-    const onChange = e => {
-        setValue({
-            ...value,
-            [e.target.name] : e.target.value
-        })
-    }
+  const onSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(REGISTER_URL, value)
+      .then((res) => {
+        console.log(res);
+        window.alert("User account creation: Successful!");
+        push("/plantlist");
+      })
+      .catch((err) => {
+        console.log("Login Axios error", err.response);
+      });
+  };
 
-    const onSubmit = e => {
-        e.preventDefault();
-        axios
-        .post('')
-        .then(res=>{
-            // When we submit register page, do we need token?
-            // Push to login page?
-            console.log(res);
-            push('/login')
-        })
-        .catch(err=>{
-            console.log('Login Axios error', err.response)
-        })  
-    }
-
-    const pageChangeReset = () => {
-        setValue(initialFormValues);
-      };
-
-    return (
-        <StyledRegisterContainer>
-          <h1> Welcome to Water My Plants Registration!</h1>
-    
-          <StyledForm onSubmit={onSubmit}>
-          <StyledInputs>
-            <label>
-              Username
-              <input
+  return (
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign up
+        </Typography>
+        <form className={classes.form} noValidate onSubmit={onSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
                 name="username"
-                type="text"
+                variant="outlined"
+                required
+                fullWidth
+                id="username"
+                label="username"
+                autoFocus
                 onChange={onChange}
-                value={value.username}
-                placeholder="Username"
               />
-            </label>
-            <label>
-              Password
-              <input
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                onChange={onChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
                 name="password"
-                type="text"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
                 onChange={onChange}
-                value={value.password}
-                placeholder="Password"
               />
-            </label>
-            <label>
-              Phone Number
-              <input
-                name="phoneNumber"
-                type="text"
-                onChange={onChange}
-                value={value.phoneNumber}
-                placeholder="Phone Number"
-              />
-            </label>
-            <button disabled={disabled} className="submit-btn">
-              Register
-            </button>
-            </StyledInputs>
-            <div className="errors">
-              {/* <div>{errors.username}</div>
-                <div>{errors.password}</div>
-                <div>{errors.phoneNumber}</div> */}
-            </div>
-            <StyledLoginLink>
-              Already Have An Account?
-              <Link to="/" onClick={pageChangeReset}>
-                <br></br>
-                Login
+            </Grid>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Sign Up
+          </Button>
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Link href="" variant="body2">
+                Already have an account? Sign in
               </Link>
-            </StyledLoginLink>
-          </StyledForm>
-        </StyledRegisterContainer>
-      );
-}
+            </Grid>
+          </Grid>
+        </form>
+      </div>
+    </Container>
+  );
+};
+
 export default Register;

@@ -3,13 +3,14 @@ import { Link, useHistory } from "react-router-dom";
 import * as yup from 'yup';
 import styled from "styled-components";
 import axios from 'axios';
+import "./style.css";
+import { LOGIN_URL } from '../Util/Private'
 
 // Styled-Components
 const StyledLoginContainer = styled.div`
   color: black;
   height: auto;
   width: auto;
-  //background-color: ;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +28,6 @@ const StyledInputs = styled.div`
   color: black;
   height: auto;
   width: auto;
-  //background-color:
   display: flex;
   border: 3px solid slategray;
   box-shadow: 0.8rem 0.8rem gray;
@@ -44,7 +44,6 @@ const StyledRegisterLink = styled.div`
   margin: 10% auto auto auto;
 `;
 
-// Import yup
 const schema = yup.object().shape({
   username: yup
     .string()
@@ -54,18 +53,14 @@ const schema = yup.object().shape({
     .string()
     .required("A password is required")
     .min(5, "The password needs to be at least 5 chars long"),
-  phoneNumber: yup
-    .string()
-    .required("A phone is required")
-    .min(10, "Your phone number needs to be at least 10 chars long"),
 });
 
-// Refactor this code to put in App.js what should be there
+const initialFormValues = {
+  username: "",
+  password: "",
+};
+
 const Login = () => {
-  const initialFormValues = {
-    username: "",
-    password: "",
-  };
   const [disabled, setDisabled] = useState(true);
   const [value, setValue] = useState(initialFormValues);
   const { push } = useHistory();
@@ -79,19 +74,21 @@ const Login = () => {
       ...value,
       [e.target.name]: e.target.value,
     });
+    console.log(value);
   };
 
   const pageChangeReset = () => {
     setValue(initialFormValues);
   };
 
-  const onSubmit = (e) => {
+  const login = (e) => {
     e.preventDefault();
     axios
-      .post("")
+      .post(LOGIN_URL, value)
       .then((res) => {
-        localStorage.setItem("token", res.data.payload);
-        push("/home");
+        localStorage.setItem("token", res.data.token);
+        push("/plantlist");
+        setValue(initialFormValues);
       })
       .catch((err) => {
         console.log("Login Axios error", err.response);
@@ -101,7 +98,7 @@ const Login = () => {
   return (
     <StyledLoginContainer>
       <h1> Welcome to Water My Plants Login! </h1>
-      <StyledForm className="login-form" onSubmit={onSubmit}>
+      <StyledForm className="login-form" onSubmit={login}>
         <StyledInputs>
           <label>
             Username
@@ -121,16 +118,6 @@ const Login = () => {
               onChange={onChange}
               value={value.password}
               placeholder="Password"
-            />
-          </label>
-          <label>
-            Phone Number
-            <input
-              name="phoneNumber"
-              type="tel"
-              onChange={onChange}
-              value={value.phoneNumber}
-              placeholder="Phone Number"
             />
           </label>
           <button disabled={disabled} className="submit-btn">

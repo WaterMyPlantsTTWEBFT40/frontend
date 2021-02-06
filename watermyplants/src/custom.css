@@ -1,0 +1,13 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+body{
+    background-color: rgb(228, 253, 225);
+    height: 100%;
+}
+
+h1{
+    font-family: Indie Flower;
+    font-size: 3em;
+    font-weight: bolder;
+}
